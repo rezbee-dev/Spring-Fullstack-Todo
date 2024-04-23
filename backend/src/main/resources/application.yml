@@ -15,11 +15,13 @@ management:
     web:
       exposure:
         include: health,info
-  # Required, see https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.6-Release-Notes#actuator-env-infocontributor-disabled-by-default
+  # Required to allow /actuator/info to work
+  #   - see https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.6-Release-Notes#actuator-env-infocontributor-disabled-by-default
   info:
     env:
       enabled: true
 
+# displayed via /actuator/info endpoint
 info:
   links:
     repo: https://github.com/rezbee-dev/Spring-Fullstack-Todo
