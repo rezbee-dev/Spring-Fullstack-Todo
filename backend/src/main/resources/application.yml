@@ -2,6 +2,10 @@ spring:
   application:
     name: todoapp
 
+server:
+  error:
+    include-stacktrace: never
+
 management:
   endpoint:
     health:
