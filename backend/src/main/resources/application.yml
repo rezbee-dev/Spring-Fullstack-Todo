@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: todoapp
+
+management:
+  endpoint:
+    health:
+      # Default just displays "UP" if all is good
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  # Required, see https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.6-Release-Notes#actuator-env-infocontributor-disabled-by-default
+  info:
+    env:
+      enabled: true
+
+info:
+  links:
+    repo: https://github.com/rezbee-dev/Spring-Fullstack-Todo
+    discord: https://discord.gg/Udhs323Wtm
