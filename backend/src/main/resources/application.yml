@@ -24,5 +24,17 @@ management:
 # displayed via /actuator/info endpoint
 info:
   links:
+    repo: TESTING_DEV
+    discord: AYY_LMAO
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: "prod"
+
+info:
+  links:
     repo: https://github.com/rezbee-dev/Spring-Fullstack-Todo
     discord: https://discord.gg/Udhs323Wtm
