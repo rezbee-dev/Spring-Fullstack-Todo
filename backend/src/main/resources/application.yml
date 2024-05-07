@@ -34,6 +34,11 @@ info:
     repo: TESTING_DEV
     discord: AYY_LMAO
 
+springdoc:
+  api-docs:
+    path: /api/docs/raw
+  swagger-ui:
+    path: /api/docs/index.html
 
 ---
 spring:

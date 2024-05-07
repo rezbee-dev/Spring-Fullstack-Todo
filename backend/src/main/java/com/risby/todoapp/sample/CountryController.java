@@ -1,5 +1,6 @@
 package com.risby.todoapp.sample;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,11 +23,13 @@ public class CountryController {
     }
 
     @GetMapping
+    @Operation(summary = "Returns all countries")
     ResponseEntity<List<Country>> findAll() {
         return new ResponseEntity<>(countryRepo.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Returns single country by id")
     ResponseEntity<Country> findOne(@PathVariable(name="id") Integer id) {
         Optional<Country> countryOptional = this.countryRepo.findById(id);
 
