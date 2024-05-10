@@ -1,9 +1,16 @@
+import {  BrowserRouter, Routes, Route, createBrowserRouter, createRoutesFromElements, RouterProvider  } from "react-router-dom"
+import CountryPage from "./pages/CountryPage"
+import HomePage from "./pages/HomePage";
+
 function App() {
   return (
-    <>
-      <p className="text-3xl font-bold underline">Hello World!</p>
-    </>
-  );
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />}/>
+        <Route path="/country" element={<CountryPage />}/>
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
 export default App;
