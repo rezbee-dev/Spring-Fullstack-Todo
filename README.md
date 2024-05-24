@@ -16,8 +16,3 @@ For learning &amp; Practice
 | 8 | Categorize todo item | Allow creation of categories and setting category for todo items |
 | 9 | Set due dates on todo item | Allow setting due dates on todo item that notify user once due date for todo is reached |
 | 10 | Set reminders on todo items | Allow setting of reminders for some period (daily, weekly, monthly) |
-
-## Collaboration?
-
-Want to learn along with me? Or just discuss Java Spring web dev? Or just do your own programming thing, but in the company of others?
-  -   Join the [discord](https://discord.gg/Udhs323Wtm)
