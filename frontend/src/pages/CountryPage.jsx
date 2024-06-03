@@ -15,7 +15,7 @@ const CountryPage = () => {
     }, [])
 
     if(countries.length == 0)
-        return <p>No Countries Available</p>
+        return <p>No Countries Available.</p>
     
     return (
         <div>

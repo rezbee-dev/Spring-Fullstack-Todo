@@ -6,6 +6,7 @@
   "scripts": {
     "test": "vitest --dir src/tests run",
     "dev": "vite",
+    "dev-docker": "vite --config vite.config.docker.js",
     "build": "vite build",
     "lint": "eslint --fix src",
     "lint:check": "eslint src",
