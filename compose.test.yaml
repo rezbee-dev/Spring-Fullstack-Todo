@@ -1,0 +1,39 @@
+name: spring-todo
+services:
+  api:
+    container_name: Spring-Todo-Api
+    build:
+      context: backend
+      target: test
+    ports:
+      - 8080:8080
+    volumes:
+      - type: bind
+        source: ./backend/pom.xml
+        target: /build/pom.xml
+    networks:
+      - network
+    env_file:
+      - path: ./.env
+        required: true
+
+  web:
+    container_name: Spring-Todo-Web
+    build:
+      context: frontend
+    ports:
+      - 8081:8081
+    volumes:
+      - ./frontend:/usr/app/frontend
+      # Anonymous volume to prevent overwriting container node_modules when mounted
+      - /usr/app/frontend/node_modules
+    networks:
+      - network
+    depends_on:
+      - api
+    command: ["npm", "run", "test"]
+
+# Enabled by default, just setting it here for naming purposes
+networks:
+  network:
+    driver: bridge

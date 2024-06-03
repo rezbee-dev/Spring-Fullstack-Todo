@@ -1,0 +1,20 @@
+name: spring-todo
+services:
+  api:
+    container_name: Spring-Todo-Api
+    build:
+      context: backend
+    ports:
+      - 8080:8080
+    env_file:
+      - path: ./.env
+        required: true
+
+  web:
+    container_name: Spring-Todo-Web
+    build:
+      context: .
+    ports:
+      - 8081:80
+    depends_on:
+      - api
