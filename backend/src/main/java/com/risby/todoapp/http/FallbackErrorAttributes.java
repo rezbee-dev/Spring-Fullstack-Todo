@@ -8,6 +8,7 @@ import org.springframework.web.context.request.WebRequest;
 import java.util.Map;
 
 // src: https://www.baeldung.com/exception-handling-for-rest-with-spring#spring-boot
+// Customizes Spring Boot's default "Whitelabel error page" to remove potentially app sensitive info
 @Component
 public class FallbackErrorAttributes extends DefaultErrorAttributes {
     @Override
