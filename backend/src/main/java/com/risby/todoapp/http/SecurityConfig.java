@@ -24,15 +24,12 @@ public class SecurityConfig {
     SecurityFilterChain configure(HttpSecurity http) throws Exception {
         return http
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**"))
-                .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/actuator/info").permitAll();
-                    auth.requestMatchers("/actuator/**").hasRole("DEV");
-                    auth.requestMatchers("/h2-console/**").hasRole("DEV");
-                    auth.requestMatchers("/").permitAll();
-                    auth.requestMatchers("/api/sample/**").permitAll();
-                    auth.requestMatchers("/api/docs/**").permitAll();
-                    auth.anyRequest().authenticated();
-                })
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/actuator/info").permitAll()
+                        .requestMatchers("/actuator/**").hasRole("DEV")
+                        .requestMatchers("/h2-console/**").hasRole("DEV")
+                        .anyRequest().permitAll()
+                )
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults())
