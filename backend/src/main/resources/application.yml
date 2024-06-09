@@ -5,6 +5,7 @@ spring:
     url: jdbc:h2:mem:mydb
   jpa:
     defer-datasource-initialization: true
+    show-sql: true
     properties:
       hibernate:
         jdbc:
@@ -51,6 +52,8 @@ spring:
       on-profile: "prod"
   h2:
     enabled: false
+  jpa:
+    show-sql: false
 
 info:
   links:
