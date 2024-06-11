@@ -1,20 +1,19 @@
 package com.risby.todoapp.todo;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 public class Todo {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "Title is mandatory")
@@ -31,9 +30,17 @@ public class Todo {
     @FutureOrPresent
     private LocalDateTime due;
     // Todo: write test to confirm default value = false
-
     @Column(nullable = false, columnDefinition = "boolean default false")
     private Boolean done = false;
+
+    @ManyToMany
+    @JoinTable(name="Todo_Category",
+                joinColumns = @JoinColumn(name = "todo_id"),
+                inverseJoinColumns = @JoinColumn(name = "category_id"))
+    // prevents infinite recursion
+    //  see https://medium.com/@AlexanderObregon/understanding-springs-jsonbackreference-and-jsonmanagedreference-annotations-783090468572
+    @JsonManagedReference
+    private Set<Category> categories;
 
     public Todo() {
     }
@@ -92,5 +99,13 @@ public class Todo {
 
     public void setDone(Boolean done) {
         this.done = done;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 }
