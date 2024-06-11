@@ -50,7 +50,7 @@ public class TodoController {
 //    }
 
     @PostMapping
-    @Operation(summary = "Creates new todo")
+    @Operation(summary = "Creates new Todo")
     public ResponseEntity<Todo> save(@RequestBody Todo todo){
         try {
             return new ResponseEntity<>(repo.save(todo), HttpStatus.CREATED);

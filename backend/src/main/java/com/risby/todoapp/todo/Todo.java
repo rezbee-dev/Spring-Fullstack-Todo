@@ -1,20 +1,18 @@
 package com.risby.todoapp.todo;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 public class Todo {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "Title is mandatory")
@@ -34,6 +32,12 @@ public class Todo {
 
     @Column(nullable = false, columnDefinition = "boolean default false")
     private Boolean done = false;
+
+    @ManyToMany
+    @JoinTable(name="Todo_Category",
+                joinColumns = @JoinColumn(name = "todo_id"),
+                inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<TodoCategory> categories;
 
     public Todo() {
     }
@@ -92,5 +96,13 @@ public class Todo {
 
     public void setDone(Boolean done) {
         this.done = done;
+    }
+
+    public Set<TodoCategory> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<TodoCategory> categories) {
+        this.categories = categories;
     }
 }
