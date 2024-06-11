@@ -12,25 +12,25 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(path="/api/todos/categories", produces = "application/json")
-public class TodoCategoryController {
-    private final TodoCategoryRepo repo;
+public class CategoryController {
+    private final CategoryRepo repo;
 
     @Autowired
-    public TodoCategoryController(TodoCategoryRepo repo){
+    public CategoryController(CategoryRepo repo){
         this.repo = repo;
     }
 
     @GetMapping
     @Operation(summary = "Returns Todo Categories")
-    public ResponseEntity<List<TodoCategory>> findAll(){
+    public ResponseEntity<List<Category>> findAll(){
         return new ResponseEntity<>(repo.findAll(), HttpStatus.OK);
     }
 
     @PostMapping
     @Operation(summary = "Creates new Todo Category")
-    public ResponseEntity<TodoCategory> save(@RequestBody TodoCategory todoCategory){
+    public ResponseEntity<Category> save(@RequestBody Category category){
         try {
-            return new ResponseEntity<>(repo.save(todoCategory), HttpStatus.CREATED);
+            return new ResponseEntity<>(repo.save(category), HttpStatus.CREATED);
         } catch (Exception e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unable to save todo category");
         }
@@ -39,8 +39,8 @@ public class TodoCategoryController {
     @DeleteMapping()
     @Operation(summary = "Deletes Todo Category by Category")
     public void removeByCategory(@RequestBody Map<String, String> body){
-        System.out.println(body.get("category"));
-        repo.deleteByCategory(body.get("category"));
+        System.out.println(body.get("label"));
+        repo.deleteByLabel(body.get("label"));
     }
 
     @DeleteMapping("/{id}")

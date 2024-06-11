@@ -2,7 +2,6 @@ package com.risby.todoapp.todo;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -37,17 +36,56 @@ public class TodoController {
         return new ResponseEntity<>(pg.stream().toList(), HttpStatus.OK);
     }
 
-//    @GetMapping
-//    @Operation(summary = "Returns all todos")
-//    public ResponseEntity<List<Todo>> findAllByCategory(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "3") int size){
-//        PageRequest p = PageRequest.of(page,size);
-//        Page<Todo> pg = repo.findAll(p);
-//
-//        System.out.println(pg.getTotalElements());
-//        System.out.println(pg.getTotalPages());
-//
-//        return new ResponseEntity<>(pg.stream().toList(), HttpStatus.OK);
-//    }
+    @GetMapping("/category")
+    @Operation(summary = "Filters todos by Category (default='') of particular page (default = 0) and size (default = 3)")
+    @Parameter(name = "page", allowEmptyValue = true)
+    @Parameter(name = "size", allowEmptyValue = true)
+    @Parameter(name = "value", allowEmptyValue = true)
+    public ResponseEntity<List<Todo>> findAllByCategory(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size,
+            @RequestParam(defaultValue = "") String value){
+        PageRequest p = PageRequest.of(page,size);
+        Page<Todo> pg;
+
+        if(value.isEmpty()) pg = repo.findAll(p);
+        else pg = repo.findByCategoriesLabelIgnoreCase(value, p);
+
+        return new ResponseEntity<>(pg.stream().toList(), HttpStatus.OK);
+    }
+
+    @GetMapping("/completed")
+    @Operation(summary = "Filters todos by Completion status (default=false) of particular page (default = 0) and size (default = 3)")
+    @Parameter(name = "page", allowEmptyValue = true)
+    @Parameter(name = "size", allowEmptyValue = true)
+    @Parameter(name = "value", allowEmptyValue = true)
+    public ResponseEntity<List<Todo>> findAllByCompletion(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size,
+            @RequestParam(defaultValue = "false") Boolean value){
+        PageRequest p = PageRequest.of(page,size);
+        Page<Todo> pg = repo.findByDone(value, p);
+
+        return new ResponseEntity<>(pg.stream().toList(), HttpStatus.OK);
+    }
+
+    @GetMapping("/priority")
+    @Operation(summary = "Filters todos by Priority (default=None) of particular page (default = 0) and size (default = 3)")
+    @Parameter(name = "page", allowEmptyValue = true)
+    @Parameter(name = "size", allowEmptyValue = true)
+    @Parameter(name = "value", allowEmptyValue = true)
+    public ResponseEntity<List<Todo>> findAllByPriority(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size,
+            @RequestParam(defaultValue = "") Integer value){
+        PageRequest p = PageRequest.of(page,size);
+        Page<Todo> pg;
+
+        if(value > 3 || value < 1) pg = repo.findAll(p);
+        else pg = repo.findByPriority(value, p);
+
+        return new ResponseEntity<>(pg.stream().toList(), HttpStatus.OK);
+    }
 
     @PostMapping
     @Operation(summary = "Creates new Todo")

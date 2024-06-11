@@ -1,5 +1,6 @@
 package com.risby.todoapp.todo;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Max;
@@ -29,7 +30,6 @@ public class Todo {
     @FutureOrPresent
     private LocalDateTime due;
     // Todo: write test to confirm default value = false
-
     @Column(nullable = false, columnDefinition = "boolean default false")
     private Boolean done = false;
 
@@ -37,7 +37,10 @@ public class Todo {
     @JoinTable(name="Todo_Category",
                 joinColumns = @JoinColumn(name = "todo_id"),
                 inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<TodoCategory> categories;
+    // prevents infinite recursion
+    //  see https://medium.com/@AlexanderObregon/understanding-springs-jsonbackreference-and-jsonmanagedreference-annotations-783090468572
+    @JsonManagedReference
+    private Set<Category> categories;
 
     public Todo() {
     }
@@ -98,11 +101,11 @@ public class Todo {
         this.done = done;
     }
 
-    public Set<TodoCategory> getCategories() {
+    public Set<Category> getCategories() {
         return categories;
     }
 
-    public void setCategories(Set<TodoCategory> categories) {
+    public void setCategories(Set<Category> categories) {
         this.categories = categories;
     }
 }

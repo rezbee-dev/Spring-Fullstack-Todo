@@ -1,5 +1,6 @@
 package com.risby.todoapp.todo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
@@ -7,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "Category")
-public class TodoCategory {
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,16 +16,17 @@ public class TodoCategory {
 
     @NotBlank(message = "Cannot be blank")
     @Column(nullable = false, unique = true)
-    private String category;
+    private String label;
 
     @ManyToMany(mappedBy = "categories")
+    @JsonBackReference
     private Set<Todo> todos;
 
-    public TodoCategory() {
+    public Category() {
     }
 
-    public TodoCategory(String category,Set<Todo> todos) {
-        this.category = category;
+    public Category(String category, Set<Todo> todos) {
+        this.label = category;
         this.todos = todos;
     }
 
@@ -37,11 +39,11 @@ public class TodoCategory {
     }
 
     public String getCategory() {
-        return category;
+        return label;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategory(String label) {
+        this.label = label;
     }
 
     public Set<Todo> getTodos() {

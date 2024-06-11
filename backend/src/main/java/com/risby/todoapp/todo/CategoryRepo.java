@@ -3,9 +3,9 @@ package com.risby.todoapp.todo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-public interface TodoCategoryRepo extends JpaRepository<TodoCategory, Long> {
+public interface CategoryRepo extends JpaRepository<Category, Long> {
 
     // implemented via derived queries
     @Transactional
-    public void deleteByCategory(String category);
+    public void deleteByLabel(String label);
 }

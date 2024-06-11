@@ -4,12 +4,12 @@ INSERT INTO country (name) VALUES ('Brazil');
 INSERT INTO country (name) VALUES ('Italy');
 INSERT INTO country (name) VALUES ('Canada');
 -- Todo Category Items
-INSERT INTO category (category) VALUES ('Category 1');
-INSERT INTO category (category) VALUES ('Category 2');
-INSERT INTO category (category) VALUES ('Category 3');
-INSERT INTO category (category) VALUES ('Category 4');
-INSERT INTO category (category) VALUES ('Category 5');
-INSERT INTO category (category) VALUES ('Category 6');
+INSERT INTO category (label) VALUES ('Category 1');
+INSERT INTO category (label) VALUES ('Category 2');
+INSERT INTO category (label) VALUES ('Category 3');
+INSERT INTO category (label) VALUES ('Category 4');
+INSERT INTO category (label) VALUES ('Category 5');
+INSERT INTO category (label) VALUES ('Category 6');
 -- Todo Items
 INSERT INTO todo (title, priority, due) VALUES ('Todo Title 1', 1, '2024-07-01 12:00:00');
 INSERT INTO todo (title, priority, due, done) VALUES ('Todo Title 2', 2, '2024-07-01 2:00:00', true);
