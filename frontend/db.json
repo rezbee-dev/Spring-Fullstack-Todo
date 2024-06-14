@@ -12,5 +12,53 @@
             "id": 3,
             "name": "Canada"
         }
+    ],
+    "todos": [
+        {
+            "id": 1,
+            "title": "Todo Title 1",
+            "desc": null,
+            "priority": 1,
+            "due": "2024-07-01T08:00:00",
+            "done": false,
+            "categories": [
+                {
+                    "id": 1,
+                    "category": "Category 1"
+                },
+                {
+                    "id": 3,
+                    "category": "Category 3"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "title": "Todo Title 2",
+            "desc": null,
+            "priority": 2,
+            "due": "2024-06-30T22:00:00",
+            "done": true,
+            "categories": [
+                {
+                    "id": 2,
+                    "category": "Category 2"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "title": "Todo Title 3",
+            "desc": null,
+            "priority": 3,
+            "due": "2024-07-01T22:00:00",
+            "done": true,
+            "categories": [
+                {
+                    "id": 4,
+                    "category": "Category 4"
+                }
+            ]
+        }        
     ]
 }
